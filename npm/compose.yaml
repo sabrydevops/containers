@@ -1,0 +1,29 @@
+services:
+  npm:
+    image: jc21/nginx-proxy-manager
+    container_name: npm
+    hostname: npm
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+      - 81:81
+    environment:
+      DB_SQLITE_FILE: /data/database.sqlite
+      DISABLE_IPV6: true
+    volumes:
+      - ./data/data:/data
+      - ./data/etc/letsencrypt:/etc/letsencrypt
+    networks:
+      - npm
+    healthcheck:
+      test: ["CMD", "/bin/check-health"]
+      interval: 10s
+      timeout: 3s
+
+
+
+
+networks:
+  npm:
+    name: npm

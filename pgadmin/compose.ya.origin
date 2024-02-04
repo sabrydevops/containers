@@ -1,0 +1,41 @@
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: always
+    ports:
+      - 1595:5432
+    environment:
+      POSTGRES_USER: user-name
+      POSTGRES_PASSWORD: strong-password
+    volumes:
+      - ./data/var/lib/postgresql/data:/var/lib/postgresql/data
+    networks:
+      - npm
+
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    restart: always
+    ports:
+      - 5011:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user-name@domain-name.com
+      PGADMIN_DEFAULT_PASSWORD: strong-password
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - npm
+
+
+
+
+volumes:
+  pgadmin-data:
+
+
+
+networks:
+  npm:
+    external: true

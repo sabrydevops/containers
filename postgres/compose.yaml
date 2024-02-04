@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    hostname: postgres
+    restart: unless-stopped
+    ports:
+      - 1595:5432
+    volumes:
+      - ./data/var/lib/postgresql/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: onezone
+      POSTGRES_PASSWORD: onezoneonezone
+      PGDATA: /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - npm
+
+
+
+
+networks:
+  npm:
+    external: true

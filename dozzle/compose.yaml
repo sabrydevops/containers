@@ -1,0 +1,18 @@
+services:
+  dozzle:
+    image: amir20/dozzle
+    container_name: dozzle
+    hostname: dozzle
+    restart: unless-stopped
+    expose:
+      - 8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - npm
+
+
+
+networks:
+  npm:
+    external: true

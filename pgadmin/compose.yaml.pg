@@ -1,0 +1,28 @@
+services:
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    hostname: pgadmin
+    restart: always
+    ports:
+      - 5011:80
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: dbadmin@onezone.sa
+      PGADMIN_DEFAULT_PASSWORD: onezoneonezone
+        #PGADMIN_LISTEN_PORT: 80
+        #PGADMIN_CONFIG_SERVER_MODE: False
+    networks:
+      - npm
+
+
+
+
+volumes:
+  pgadmin:
+
+
+networks:
+  npm:
+    external: true
